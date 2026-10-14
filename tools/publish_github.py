@@ -2,10 +2,10 @@
 """Publish SpAll to GitHub: push the tree, tag it, and open a Release.
 
 Why a script instead of `git push` plus the web UI: on the machine this was developed
-on, only git's TLS stack could reach github.com at all, and `api.github.com` was
-unreachable from .NET and from curl because both use Windows schannel while git uses
-OpenSSL. Python uses OpenSSL too, so the REST API is reachable from here 鈥?which is what
-makes creating a Release and uploading an asset possible at all.
+on, only git's TLS stack could reach github.com at all. The REST API was unreachable
+from .NET and from curl, because both use Windows schannel while git uses OpenSSL.
+Python uses OpenSSL too, so the API is reachable from here, and that is what makes
+creating a Release and uploading an asset possible at all.
 
 The token needs, at minimum:
   * Contents: Read and write   (to push the tree and create the Release)
