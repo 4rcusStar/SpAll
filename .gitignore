@@ -42,6 +42,12 @@ spall-selftest-report.txt
 *.user
 *.swp
 
+# --- Python bytecode ---------------------------------------------------------
+# The tools/ scripts get imported or compiled during use; the caches are machine
+# specific and can embed absolute local paths.
+__pycache__/
+*.pyc
+
 # --- OS cruft ----------------------------------------------------------------
 Thumbs.db
 Desktop.ini
