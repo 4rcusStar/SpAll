@@ -73,8 +73,13 @@ def git(*args) -> str:
 
 
 def repo_root() -> str:
-    """Absolute path of the working tree, so the script runs from any directory."""
-    return git("rev-parse", "--show-toplevel").strip()
+    """Absolute path of the working tree, so the script runs from any directory.
+
+    Derived from this file's own location (tools/ lives directly under the root) rather
+    than from `git rev-parse`, which fails outright when the process starts outside a
+    repository. `--repo-dir` overrides it for unusual layouts.
+    """
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def tracked_files() -> list[str]:
@@ -84,6 +89,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo", required=True, help="owner/name")
     parser.add_argument("--token", default=os.environ.get("GITHUB_TOKEN", ""))
+    parser.add_argument("--repo-dir", default="", help="working tree to publish")
     parser.add_argument("--branch", default="main")
     parser.add_argument("--tag", default="v1.0.0")
     parser.add_argument("--title", default="SpAll 1.0.0")
@@ -101,7 +107,7 @@ def main() -> int:
 
     # Everything is resolved against the working tree, so the script behaves the same
     # whether it is invoked from the repository root or anywhere else.
-    os.chdir(repo_root())
+    os.chdir(args.repo_dir or repo_root())
 
     gh = GitHub(args.token, args.dry_run)
 
