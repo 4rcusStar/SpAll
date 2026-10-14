@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Publish SpAll to GitHub: push the tree, tag it, and open a Release.
 
 Why a script instead of `git push` plus the web UI: on the machine this was developed
@@ -72,9 +72,13 @@ def git(*args) -> str:
     return subprocess.run(["git", *args], check=True, capture_output=True, text=True).stdout
 
 
+def repo_root() -> str:
+    """Absolute path of the working tree, so the script runs from any directory."""
+    return git("rev-parse", "--show-toplevel").strip()
+
+
 def tracked_files() -> list[str]:
     return [line for line in git("ls-files").splitlines() if line.strip()]
-
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -94,6 +98,10 @@ def main() -> int:
     owner, _, name = args.repo.partition("/")
     if not name:
         raise SystemExit("--repo must be owner/name")
+
+    # Everything is resolved against the working tree, so the script behaves the same
+    # whether it is invoked from the repository root or anywhere else.
+    os.chdir(repo_root())
 
     gh = GitHub(args.token, args.dry_run)
 
