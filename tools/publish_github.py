@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Publish SpAll to GitHub: push the tree, tag it, and open a Release.
 
 Why a script instead of `git push` plus the web UI: on the machine this was developed
 on, only git's TLS stack could reach github.com at all, and `api.github.com` was
 unreachable from .NET and from curl because both use Windows schannel while git uses
-OpenSSL. Python uses OpenSSL too, so the REST API is reachable from here — which is what
+OpenSSL. Python uses OpenSSL too, so the REST API is reachable from here 鈥?which is what
 makes creating a Release and uploading an asset possible at all.
 
 The token needs, at minimum:
@@ -83,7 +83,7 @@ def main() -> int:
     parser.add_argument("--branch", default="main")
     parser.add_argument("--tag", default="v1.0.0")
     parser.add_argument("--title", default="SpAll 1.0.0")
-    parser.add_argument("--notes", default="build/release-notes.md")
+    parser.add_argument("--notes", default="docs/release-notes-1.0.0.md")
     parser.add_argument("--asset", default="build/SpAll-1.0.0-source.zip")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
