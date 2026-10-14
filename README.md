@@ -1,5 +1,9 @@
 # SpAll
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](#building)
+[![Qt 6](https://img.shields.io/badge/Qt-6.5%2B-green.svg)](#dependencies)
+
 A lightweight desktop GLSL editor that compiles to SPIR-V in-process and shows you the
 result immediately.
 
@@ -152,5 +156,7 @@ relevant code:
 
 ## License
 
-Third-party dependencies retain their original licenses (Apache-2.0 / BSD-style, all
-from Khronos). No license has been chosen for this project's own source yet.
+MIT — see [LICENSE](LICENSE).
+
+Third-party dependencies retain their own licenses (Apache-2.0 / BSD-style, all from
+Khronos); see the [Dependencies](#dependencies) section.

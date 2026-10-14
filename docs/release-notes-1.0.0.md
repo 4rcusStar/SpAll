@@ -67,7 +67,7 @@ See the README for the full option list and the Linux equivalent.
 
 - **Source-only release.** No prebuilt binaries: Qt and the four Khronos dependencies
   are not redistributed here.
-- No license has been chosen for this project's own source yet. The third-party
-  dependencies retain their original Apache-2.0 / BSD-style licenses.
+- Released under the **MIT** license; the third-party dependencies retain their original
+  Apache-2.0 / BSD-style licenses.
 - Windows-centric: the build tooling ships as PowerShell scripts, though the CMake
   project itself is portable and builds on Linux with distribution Qt packages.
