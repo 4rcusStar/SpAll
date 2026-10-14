@@ -1,0 +1,21 @@
+#version 450
+
+// comp.comp — a compute shader with a storage buffer, matching the smoke test's
+// expectation of exactly one descriptor and local_size 8x8x1.
+//
+// Expected reflection output:
+//   set=0 binding=0  storage buffer  Data  (member "values" at offset 0)
+//   local size 8 x 8 x 1
+
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+layout(set = 0, binding = 0) buffer Data
+{
+    float values[];
+} data;
+
+void main()
+{
+    const uint index = gl_GlobalInvocationID.x + gl_GlobalInvocationID.y * gl_NumWorkGroups.x * 8u;
+    data.values[index] = data.values[index] * 2.0 + 1.0;
+}
